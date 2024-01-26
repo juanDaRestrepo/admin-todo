@@ -16,7 +16,10 @@ export default async function RestTodosPage() {
 
   const user = await getUserSessionServer();
   if ( !user ) redirect('/api/auth/signin');
-  
+ /*  const allUserInfo = await prisma.user.findMany({ 
+    where: { id: user.id },
+  });
+  console.log(allUserInfo); */
   const todos = await prisma.todo.findMany({ 
     where: { userId: user.id },
     orderBy: { description: 'asc' } 
@@ -30,7 +33,9 @@ export default async function RestTodosPage() {
       <div className="w-full px-3 mx-5 mb-5">
         <NewTodo />
       </div>
-      
+      <pre>
+        {JSON.stringify(user)}
+      </pre>
       <TodosGrid todos={ todos } />
     </>
   );

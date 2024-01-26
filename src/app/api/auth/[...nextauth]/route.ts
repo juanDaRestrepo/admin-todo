@@ -65,9 +65,12 @@ export const authOptions:NextAuthOptions = {
       if ( dbUser?.isActive === false ) {
         throw Error('Usuario no está activo');
       }
-
+      console.log("token");
+      console.log(token)
       token.roles = dbUser?.roles ?? ['no-roles'];
       token.id    = dbUser?.id ?? 'no-uuid';
+      token.firstName = dbUser?.firstName ?? 'no-firstName'; // Include the new fields
+      token.familyName = dbUser?.familyName ?? 'no-familyName'; // Include the new fields
 
       return token;
     },
